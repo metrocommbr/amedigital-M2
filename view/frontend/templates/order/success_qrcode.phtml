@@ -1,0 +1,40 @@
+<?php
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$assetRepo = $objectManager->get('Magento\Framework\View\Asset\Repository');
+$ame_logo = $assetRepo->getUrl("AmeDigital_AME::images/ame-digital.png");
+
+if($block->getPaymentMethod()=="ame") {
+    $total_discount = 0;
+    $items = $block->getOrder()->getAllItems();
+    foreach ($items as $item) {
+        $total_discount = $total_discount + $item->getDiscountAmount();
+    }
+    ?>
+    <div id='success_ame_external'>
+        <center>
+        <div id='success_ame_internal'>
+            &nbsp;<br>
+            <div id="success_ame_value_txt"><img src="<?php echo $ame_logo; ?>" width="150"><br><br>
+                Valor da compra:</div>
+            <div id="success_ame_value">R$<?php echo number_format($block->getPrice()-abs($total_discount),
+                    2,",","."); ?></div><br>
+            <div id="success_ame_cashback_txt">Receba de volta <div id="success_ame_cashback_percent">
+                    <?php echo number_format($block->getCashbackValue(),2,",","."); ?></div> em até 30 dias.</div><br>
+            <div id="success_ame_facil">Pague agora com Ame Digital!</div>
+            <img id="success_ame_qrcode" src='<?php echo $block->getQrCodeLink(); ?>'/>
+            <div id="success_ame_info">Abra o aplicativo Ame Digital e escaneie o QrCode para pagar!
+            </div>
+            <br>&nbsp;
+            <br>&nbsp;
+            <br>&nbsp;
+        </div>
+        </center>
+        <script>
+            if(window.innerWidth<=500){
+                window.location = "<?php echo $block->getDeepLink();?>";
+            }
+        </script>
+    </div>
+    <?php
+}

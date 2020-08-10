@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page>
+<head>
+    <css src="AmeDigital_AME::css/success.css"/>
+</head>
+<body>
+    <referenceContainer name="content">
+        <block class="AmeDigital\AME\Block\QrCode" name="order.details.success" template="AmeDigital_AME::order/success.phtml" after="order.success.additional.info"/>
+    </referenceContainer>
+</body>
+</page>

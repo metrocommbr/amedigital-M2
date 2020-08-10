@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="ame_tab" translate="label" sortOrder="400">
+            <label>AME Digital</label>
+        </tab>
+        <section id="ame" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Configurar AmeDigital</label>
+            <tab>ame_tab</tab>
+            <resource>AmeDigital_AME::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Ativo</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="title" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Título do Método de Pagamento</label>
+                </field>
+                <label>Configurações</label>
+                <field id="api_user" translate="label" type="text" sortOrder="30" showInDefault="1">
+                    <label>Client ID</label>
+                    <validate>required-entry validate-uuid</validate>
+                </field>
+                <field id="api_password" translate="label" type="text" sortOrder="40" showInDefault="1">
+                    <label>Client Secret</label>
+                    <validate>required-entry validate-uuid</validate>
+                </field>
+                <field id="cashback_percent" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Porcentagem de Cashback</label>
+                 </field> 
+
+                <field id="allowspecific" translate="label" type="allowspecific" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Limitação por país</label>
+                    <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="41" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Limitação por países específicos</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+            </group>
+            <group id="address" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Endereço</label>
+                <field id="street" translate="label" type="select" sortOrder="10" showInDefault="1">
+                    <label>Rua</label>
+                    <source_model>AmeDigital\AME\Model\Config\AddressLines</source_model>
+                </field>
+                <field id="number" translate="label" type="select" sortOrder="20" showInDefault="1">
+                    <label>Número</label>
+                    <source_model>AmeDigital\AME\Model\Config\AddressLines</source_model>
+                </field>
+                <field id="neighborhood" translate="label" type="select" sortOrder="30" showInDefault="1">
+                    <label>Bairro</label>
+                    <source_model>AmeDigital\AME\Model\Config\AddressLines</source_model>
+                </field>
+            </group>
+            <group id="ame" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Configurações</label>
+
+
+            </group>
+
+
+        </section>
+    </system>
+</config>

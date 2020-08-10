@@ -1,0 +1,48 @@
+<?php
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$assetRepo = $objectManager->get('Magento\Framework\View\Asset\Repository');
+$order = $block->getOrder();
+$ame_logo = $assetRepo->getUrl("AmeDigital_AME::images/ame-digital.png");
+
+echo "";
+if($block->getPaymentMethod()=="ame") {
+    $total_discount = 0;
+    $items = $block->getOrder()->getAllItems();
+    foreach ($items as $item) {
+        $total_discount = $total_discount + $item->getDiscountAmount();
+    }
+    ?>
+    <div id='success_container'>
+        <div align="center" id='success_content'>
+            &nbsp;<br>
+            <div id="success_value_txt"><img src="<?php echo $ame_logo; ?>" width="150"><br><br>
+                Valor da compra:</div>
+            <div id="success_value">R$<?php echo number_format($block->getPrice()-abs($total_discount),
+                    2,",","."); ?></div><br>
+            <div id="success_cashback_txt">Receba de volta <div id="success_cashback_value">
+                    <?php echo number_format($block->getCashbackValue(),2,",","."); ?></div> em até 30 dias.</div><br>
+            <div class="success_facil">Pagar com a AME é fácil e rápido!</div>
+            <img class="success_qrcode" src='<?php echo $block->getQrCodeLink(); ?>'/>
+            <div id="success_info">1. Abra o aplicativo Ame Digital. Se você ainda não tem, <br>baixe no
+                <img src="<?php echo $this->getViewFileUrl('AmeDigital_AME::images/google-logo.svg');?>" alt='Google Play' height="16">
+                ou na
+                <img src="<?php echo $this->getViewFileUrl('AmeDigital_AME::images/apple-logo.svg');?>" alt='App Store' height="16"><br>
+                2. Clique em pagar
+                <img src="<?php echo $this->getViewFileUrl('AmeDigital_AME::images/ame-small-logo.svg');?>" alt='AME Logo'>
+                e aponte para o QR Code.<br>
+                3. Pronto, agora é só finalizar o pagamento com Ame.<br>
+                <br>
+            </div>
+            <br>&nbsp;
+            <br>&nbsp;
+            <br>&nbsp;
+        </div>
+        <script>
+            if(window.innerWidth<=500){
+                window.location = "<?php echo $block->getDeepLink();?>";
+            }
+        </script>
+    </div>
+    <?php
+}

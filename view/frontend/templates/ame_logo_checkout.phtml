@@ -1,0 +1,10 @@
+<?php
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$assetRepo = $objectManager->get('Magento\Framework\View\Asset\Repository');
+$ame_logo = $assetRepo->getUrl("AmeDigital_AME::images/ame-logo.png");
+
+?>
+<script>
+window.ameLogo = '<?php echo $ame_logo; ?>';
+</script>
