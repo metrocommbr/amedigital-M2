@@ -1,0 +1,16 @@
+{
+    "name": "AmeDigital/AME",
+    "description": "AmeDigital for Magento 2",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Metrocommbr",
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "metrocommbr/amedigital-M2": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+ }
